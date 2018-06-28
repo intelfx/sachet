@@ -19,6 +19,8 @@ import (
 	"github.com/intelfx/sachet/provider/messagebird"
 	"github.com/intelfx/sachet/provider/nexmo"
 	"github.com/intelfx/sachet/provider/otc"
+	"github.com/intelfx/sachet/provider/smscru"
+	"github.com/intelfx/sachet/provider/smsru"
 	"github.com/intelfx/sachet/provider/telegram"
 	"github.com/intelfx/sachet/provider/turbosms"
 	"github.com/intelfx/sachet/provider/twilio"
@@ -158,6 +160,10 @@ func providerByName(name string) (sachet.Provider, error) {
 		return mediaburst.NewMediaBurst(config.Providers.MediaBurst), nil
 	case "freemobile":
 		return freemobile.NewFreeMobile(config.Providers.FreeMobile), nil
+	case "smsru":
+		return smsru.NewSmsRu(config.Providers.SmsRu), nil
+	case "smscru":
+		return smscru.NewSmscRu(config.Providers.SmscRu), nil
 	}
 
 	return nil, fmt.Errorf("%s: Unknown provider", name)

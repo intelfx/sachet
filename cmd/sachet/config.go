@@ -11,6 +11,8 @@ import (
 	"github.com/intelfx/sachet/provider/messagebird"
 	"github.com/intelfx/sachet/provider/nexmo"
 	"github.com/intelfx/sachet/provider/otc"
+	"github.com/intelfx/sachet/provider/smscru"
+	"github.com/intelfx/sachet/provider/smsru"
 	"github.com/intelfx/sachet/provider/telegram"
 	"github.com/intelfx/sachet/provider/turbosms"
 	"github.com/intelfx/sachet/provider/twilio"
@@ -38,6 +40,8 @@ var config struct {
 		OTC         otc.OTCConfig
 		MediaBurst  mediaburst.MediaBurstConfig
 		FreeMobile  freemobile.Config
+		SmsRu       smsru.Config
+		SmscRu      smscru.Config
 	}
 
 	Receivers []ReceiverConf
