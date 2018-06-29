@@ -98,12 +98,13 @@ func main() {
 			Text: text,
 		}
 
-		if err = provider.Send(message); err != nil {
-			errorHandler(w, http.StatusBadRequest, err, receiverConf.Provider)
+		resp, err := provider.Send(message)
+		if err != nil {
+			errorRespHandler(w, http.StatusServiceUnavailable, err, resp.Body, receiverConf.Provider)
 			return
 		}
 
-		requestTotal.WithLabelValues("200", receiverConf.Provider).Inc()
+		okRespHandler(w, resp.Status, resp.Body, receiverConf.Provider)
 	})
 
 	http.Handle("/metrics", prometheus.Handler())
@@ -173,6 +174,7 @@ func providerByName(name string) (sachet.Provider, error) {
 	return nil, fmt.Errorf("%s: Unknown provider", name)
 }
 
+// Handle internal sachet error
 func errorHandler(w http.ResponseWriter, status int, err error, provider string) {
 	w.WriteHeader(status)
 
@@ -191,5 +193,51 @@ func errorHandler(w http.ResponseWriter, status int, err error, provider string)
 	fmt.Fprint(w, json)
 
 	log.Println("Error: " + json)
+	requestTotal.WithLabelValues(strconv.FormatInt(int64(status), 10), provider).Inc()
+}
+
+// Handle server response with error
+func errorRespHandler(w http.ResponseWriter, status int, err error, resp interface{}, provider string) {
+	w.WriteHeader(status)
+
+	data := struct {
+		Error    bool
+		Status   int
+		Message  string
+		Response interface{}
+	}{
+		true,
+		status,
+		err.Error(),
+		resp,
+	}
+	// respond json
+	bytes, _ := json.Marshal(data)
+	json := string(bytes[:])
+	fmt.Fprint(w, json)
+
+	log.Println("Provider error: " + json)
+	requestTotal.WithLabelValues(strconv.FormatInt(int64(status), 10), provider).Inc()
+}
+
+// Handle server response without error
+func okRespHandler(w http.ResponseWriter, status int, resp interface{}, provider string) {
+	w.WriteHeader(status)
+
+	data := struct {
+		Error    bool
+		Status   int
+		Response interface{}
+	}{
+		false,
+		status,
+		resp,
+	}
+	// respond json
+	bytes, _ := json.Marshal(data)
+	json := string(bytes[:])
+	fmt.Fprint(w, json)
+
+	log.Println("Success: " + json)
 	requestTotal.WithLabelValues(strconv.FormatInt(int64(status), 10), provider).Inc()
 }

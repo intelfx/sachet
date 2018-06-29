@@ -2,15 +2,18 @@ package util
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/intelfx/sachet"
 )
 
 const RequestTimeout = time.Second * 10
 
-func SimpleSend(form url.Values, query url.Values, URL string) (err error) {
+func SimpleSend(form url.Values, query url.Values, URL string) (sachet_resp sachet.Response, err error) {
 	var req *http.Request
 	var resp *http.Response
 
@@ -38,11 +41,18 @@ func SimpleSend(form url.Values, query url.Values, URL string) (err error) {
 	}
 	defer resp.Body.Close()
 
-	var body []byte
-	resp.Body.Read(body)
-	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("Failed to send SMS: HTTP %d \"%s\"", resp.StatusCode, string(body))
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return
 	}
 
+	sachet_resp = sachet.Response{
+		Status: resp.StatusCode,
+		Body:   body,
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		err = fmt.Errorf("Failed to send SMS: HTTP %d \"%s\"", resp.StatusCode, string(body))
+	}
 	return
 }

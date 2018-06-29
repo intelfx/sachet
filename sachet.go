@@ -1,7 +1,12 @@
 package sachet
 
+type Response struct {
+	Status int
+	Body   interface{}
+}
+
 type Provider interface {
-	Send(message Message) error
+	Send(message Message) (Response, error)
 }
 
 type Message struct {

@@ -1,6 +1,8 @@
 package smscru
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/url"
 	"strings"
 
@@ -22,7 +24,7 @@ func NewSmscRu(config Config) *SmscRu {
 	return SmscRu
 }
 
-func (c *SmscRu) Send(message sachet.Message) (err error) {
+func (c *SmscRu) Send(message sachet.Message) (resp sachet.Response, err error) {
 	URL := "https://smsc.ru/sys/send.php"
 
 	form := url.Values{
@@ -35,9 +37,22 @@ func (c *SmscRu) Send(message sachet.Message) (err error) {
 
 	query := url.Values{}
 
-	err = util.SimpleSend(form, query, URL)
+	resp, err = util.SimpleSend(form, query, URL)
 	if err != nil {
 		return
 	}
+
+	var resp_obj interface{}
+	err = json.Unmarshal(resp.Body.([]byte), &resp_obj)
+	if err != nil {
+		return
+	}
+
+	_, resp_is_error := resp_obj.(map[string]interface{})["error"]
+	if resp_is_error {
+		err = fmt.Errorf("Backend reported error")
+	}
+
+	resp.Body = resp_obj
 	return
 }

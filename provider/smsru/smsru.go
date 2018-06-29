@@ -1,6 +1,8 @@
 package smsru
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/url"
 	"strings"
 
@@ -21,7 +23,7 @@ func NewSmsRu(config Config) *SmsRu {
 	return SmsRu
 }
 
-func (c *SmsRu) Send(message sachet.Message) (err error) {
+func (c *SmsRu) Send(message sachet.Message) (resp sachet.Response, err error) {
 	URL := "https://sms.ru/sms/send"
 
 	form := url.Values{
@@ -33,9 +35,22 @@ func (c *SmsRu) Send(message sachet.Message) (err error) {
 
 	query := url.Values{}
 
-	err = util.SimpleSend(form, query, URL)
+	resp, err = util.SimpleSend(form, query, URL)
 	if err != nil {
 		return
 	}
+
+	var resp_obj interface{}
+	err = json.Unmarshal(resp.Body.([]byte), &resp_obj)
+	if err != nil {
+		return
+	}
+
+	resp_status := resp_obj.(map[string]interface{})["status"].(string)
+	if resp_status != "OK" {
+		err = fmt.Errorf("Backend reported error")
+	}
+
+	resp.Body = resp_obj
 	return
 }
