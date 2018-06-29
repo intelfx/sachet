@@ -11,19 +11,21 @@ import (
 	"strings"
 
 	"github.com/intelfx/sachet"
-	"github.com/intelfx/sachet/provider/cm"
-	"github.com/intelfx/sachet/provider/exotel"
-	"github.com/intelfx/sachet/provider/freemobile"
-	"github.com/intelfx/sachet/provider/infobip"
-	"github.com/intelfx/sachet/provider/mediaburst"
-	"github.com/intelfx/sachet/provider/messagebird"
-	"github.com/intelfx/sachet/provider/nexmo"
-	"github.com/intelfx/sachet/provider/otc"
+	/*
+		"github.com/intelfx/sachet/provider/cm"
+		"github.com/intelfx/sachet/provider/exotel"
+		"github.com/intelfx/sachet/provider/freemobile"
+		"github.com/intelfx/sachet/provider/infobip"
+		"github.com/intelfx/sachet/provider/mediaburst"
+		"github.com/intelfx/sachet/provider/messagebird"
+		"github.com/intelfx/sachet/provider/nexmo"
+		"github.com/intelfx/sachet/provider/otc"
+		"github.com/intelfx/sachet/provider/telegram"
+		"github.com/intelfx/sachet/provider/turbosms"
+		"github.com/intelfx/sachet/provider/twilio"
+	*/
 	"github.com/intelfx/sachet/provider/smscru"
 	"github.com/intelfx/sachet/provider/smsru"
-	"github.com/intelfx/sachet/provider/telegram"
-	"github.com/intelfx/sachet/provider/turbosms"
-	"github.com/intelfx/sachet/provider/twilio"
 
 	"github.com/prometheus/alertmanager/template"
 	"github.com/prometheus/client_golang/prometheus"
@@ -138,28 +140,30 @@ func receiverConfByReceiver(name string) *ReceiverConf {
 
 func providerByName(name string) (sachet.Provider, error) {
 	switch name {
-	case "messagebird":
-		return messagebird.NewMessageBird(config.Providers.MessageBird), nil
-	case "nexmo":
-		return nexmo.NewNexmo(config.Providers.Nexmo)
-	case "twilio":
-		return twilio.NewTwilio(config.Providers.Twilio), nil
-	case "infobip":
-		return infobip.NewInfobip(config.Providers.Infobip), nil
-	case "turbosms":
-		return turbosms.NewTurbosms(config.Providers.Turbosms), nil
-	case "exotel":
-		return exotel.NewExotel(config.Providers.Exotel), nil
-	case "cm":
-		return cm.NewCM(config.Providers.CM), nil
-	case "telegram":
-		return telegram.NewTelegram(config.Providers.Telegram)
-	case "otc":
-		return otc.NewOTC(config.Providers.OTC), nil
-	case "mediaburst":
-		return mediaburst.NewMediaBurst(config.Providers.MediaBurst), nil
-	case "freemobile":
-		return freemobile.NewFreeMobile(config.Providers.FreeMobile), nil
+	/*
+		case "messagebird":
+			return messagebird.NewMessageBird(config.Providers.MessageBird), nil
+		case "nexmo":
+			return nexmo.NewNexmo(config.Providers.Nexmo)
+		case "twilio":
+			return twilio.NewTwilio(config.Providers.Twilio), nil
+		case "infobip":
+			return infobip.NewInfobip(config.Providers.Infobip), nil
+		case "turbosms":
+			return turbosms.NewTurbosms(config.Providers.Turbosms), nil
+		case "exotel":
+			return exotel.NewExotel(config.Providers.Exotel), nil
+		case "cm":
+			return cm.NewCM(config.Providers.CM), nil
+		case "telegram":
+			return telegram.NewTelegram(config.Providers.Telegram)
+		case "otc":
+			return otc.NewOTC(config.Providers.OTC), nil
+		case "mediaburst":
+			return mediaburst.NewMediaBurst(config.Providers.MediaBurst), nil
+		case "freemobile":
+			return freemobile.NewFreeMobile(config.Providers.FreeMobile), nil
+	*/
 	case "smsru":
 		return smsru.NewSmsRu(config.Providers.SmsRu), nil
 	case "smscru":
