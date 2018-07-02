@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 )
 
 //ExotelConfig configuration struct for exotel Client

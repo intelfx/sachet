@@ -3,7 +3,7 @@ package telegram
 import (
 	"strconv"
 
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 	"gopkg.in/telegram-bot-api.v4"
 )
 

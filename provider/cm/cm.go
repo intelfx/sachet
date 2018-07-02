@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 )
 
 // CMConfig is the configuration struct for CM provider

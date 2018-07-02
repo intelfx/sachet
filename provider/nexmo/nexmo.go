@@ -1,7 +1,7 @@
 package nexmo
 
 import (
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 	"gopkg.in/njern/gonexmo.v1"
 )
 

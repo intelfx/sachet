@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/messagebird/go-rest-api"
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 )
 
 type MessageBirdConfig struct {

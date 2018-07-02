@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 )
 
 //InfobipConfig configuration struct for Infobip Client

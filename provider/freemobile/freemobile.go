@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 )
 
 // Config is the configuration struct for FreeMobile provider

@@ -1,6 +1,6 @@
 # Sachet
 
-[![Build Status](https://travis-ci.org/messagebird/sachet.svg?branch=master)](https://travis-ci.org/messagebird/sachet)
+[![Build Status](https://travis-ci.org/intelfx/sachet.svg?branch=master)](https://travis-ci.org/intelfx/sachet)
 
 Sachet (or सचेत) is Hindi for conscious. Sachet is an SMS alerting tool for the [Prometheus Alertmanager](https://github.com/prometheus/alertmanager).
 
@@ -15,7 +15,7 @@ An HTTP API that accepts Alertmanager webhook calls and allows an end-user to co
 First get it 
 
 ```
-$ go get github.com/messagebird/sachet/cmd/sachet
+$ go get github.com/intelfx/sachet/cmd/sachet
 ```
 
 And then running Sachet is as easy as executing `sachet` on the command line.

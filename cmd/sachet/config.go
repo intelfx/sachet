@@ -3,17 +3,17 @@ package main
 import (
 	"io/ioutil"
 
-	"github.com/messagebird/sachet/provider/cm"
-	"github.com/messagebird/sachet/provider/exotel"
-	"github.com/messagebird/sachet/provider/freemobile"
-	"github.com/messagebird/sachet/provider/infobip"
-	"github.com/messagebird/sachet/provider/mediaburst"
-	"github.com/messagebird/sachet/provider/messagebird"
-	"github.com/messagebird/sachet/provider/nexmo"
-	"github.com/messagebird/sachet/provider/otc"
-	"github.com/messagebird/sachet/provider/telegram"
-	"github.com/messagebird/sachet/provider/turbosms"
-	"github.com/messagebird/sachet/provider/twilio"
+	"github.com/intelfx/sachet/provider/cm"
+	"github.com/intelfx/sachet/provider/exotel"
+	"github.com/intelfx/sachet/provider/freemobile"
+	"github.com/intelfx/sachet/provider/infobip"
+	"github.com/intelfx/sachet/provider/mediaburst"
+	"github.com/intelfx/sachet/provider/messagebird"
+	"github.com/intelfx/sachet/provider/nexmo"
+	"github.com/intelfx/sachet/provider/otc"
+	"github.com/intelfx/sachet/provider/telegram"
+	"github.com/intelfx/sachet/provider/turbosms"
+	"github.com/intelfx/sachet/provider/twilio"
 
 	"gopkg.in/yaml.v2"
 )

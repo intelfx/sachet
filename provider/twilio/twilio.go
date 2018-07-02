@@ -2,7 +2,7 @@ package twilio
 
 import (
 	"github.com/carlosdp/twiliogo"
-	"github.com/messagebird/sachet"
+	"github.com/intelfx/sachet"
 )
 
 type TwilioConfig struct {
